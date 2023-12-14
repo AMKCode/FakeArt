@@ -3,6 +3,7 @@ from torch.utils.data import Dataset
 from torchvision.transforms import ToTensor
 import os
 from torchvision.io import read_image
+import random
 
 class AIArtBenchDataset(Dataset):
     def __init__(self, root, for_training=True, transforms=None, target_transforms=None):
@@ -19,7 +20,9 @@ class AIArtBenchDataset(Dataset):
         for directory in os.listdir(self.root):
             for image in os.listdir(os.path.join(self.root, directory)):
                 self.fnames_list.append(os.path.join(directory, image))
-    
+
+        # random.shuffle(self.fnames_list)
+
     def __len__(self):
         return len(self.fnames_list)
 
